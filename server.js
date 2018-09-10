@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 
 const port = process.env.PORT || 3000;
 const corsOptions = {
-    origin: ['https://yabbale-01.herokuapp.com', 'chrome-extension://haplcilekkkmjbpejdhhadajdfkhohoc', 'chrome-extension://']
+    origin: ['https://yabbale-01.herokuapp.com', 'chrome-extension://haplcilekkkmjbpejdhhadajdfkhohoc', '*']
 }
 app.use(cors(corsOptions));
 
