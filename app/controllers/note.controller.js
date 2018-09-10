@@ -61,7 +61,7 @@ exports.update = (req, res) => {
     // Find note and update it with the request params
     Note.findOneAndUpdate({"urlId": req.params.urlId}, {
         urlId: req.params.urlId || "Untitled Note",
-        content: req.params.content
+        content: req.body.content
     }, {new: true, upsert: true})
     .then(note => {
         res.send(note);

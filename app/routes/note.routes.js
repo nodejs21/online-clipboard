@@ -8,6 +8,6 @@ module.exports = (app) => {
     app.get('/notes/get/:urlId', notes.findOne);
 
     // Update a Note with urlId
-    app.get('/notes/push/:urlId/:content', notes.update);
+    app.post('/notes/push/:urlId/:content', notes.update);
 
 }
