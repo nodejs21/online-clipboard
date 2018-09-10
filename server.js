@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const shortid = require('shortid');
+const cors = require('cors');
 
 // create express app
 const app = express();
@@ -12,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const port = process.env.PORT || 3000;
+const corsOptions = {
+    origin: 'https://yabbale-01.herokuapp.com'
+}
+app.use(cors(corsOptions));
 
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
