@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const shortid = require('shortid');
 
 // create express app
 const app = express();
@@ -18,7 +19,7 @@ mongoose.Promise = global.Promise;
 
 // Connecting to the database
 mongoose.connect(dbConfig.url, {
-	useNewUrlParser: true
+    useNewUrlParser: true
 }).then(() => {
     console.log("Successfully connected to the database");    
 }).catch(err => {
@@ -26,9 +27,17 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
+// serve angular frontend
+// app.use(express.static(path.join(__dirname, 'dist')));
+// app.get('/', (req, res) => {
+//     res.render('index');
+// });
+
 // define a simple route
 app.get('/', (req, res) => {
-    res.json({"message": "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes."});
+    var urlId = shortid.generate();
+    res.redirect(`/notes/${urlId}`);
+    // res.json({"message": "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes."});
 });
 
 require('./app/routes/note.routes.js')(app);
