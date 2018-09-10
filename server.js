@@ -13,10 +13,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const port = process.env.PORT || 3000;
-const corsOptions = {
-    origin: ['https://yabbale-01.herokuapp.com', 'chrome-extension://haplcilekkkmjbpejdhhadajdfkhohoc', '*']
-}
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: ['https://yabbale-01.herokuapp.com', 'chrome-extension://haplcilekkkmjbpejdhhadajdfkhohoc', '*']
+// }
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
