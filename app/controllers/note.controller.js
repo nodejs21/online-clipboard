@@ -2,6 +2,7 @@ const Note = require('../models/note.model.js');
 
 // Create and Save a new Note
 exports.create = (req, res) => {
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     console.log(req.params);
     
     // Create a Note
@@ -23,6 +24,7 @@ exports.create = (req, res) => {
 
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {
+    // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     // Note.find()
     // .then(notes => {
     //     res.send(notes);
@@ -35,6 +37,7 @@ exports.findAll = (req, res) => {
 
 // Find a single note with a urlId
 exports.findOne = (req, res) => {
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     Note.find({"urlId": req.params.urlId})
     .then(note => {
         res.send(note);
@@ -52,6 +55,7 @@ exports.findOne = (req, res) => {
 
 // Update a note identified by the urlId in the request
 exports.update = (req, res) => {
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     // Find note and update it with the request params
     Note.findOneAndUpdate({"urlId": req.params.urlId}, {
         urlId: req.params.urlId || "Untitled Note",
