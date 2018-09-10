@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse application/json
 app.use(bodyParser.json())
 
+const port = process.env.PORT || 3000;
+
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
@@ -43,6 +45,6 @@ app.get('/', (req, res) => {
 require('./app/routes/note.routes.js')(app);
 
 // listen for requests
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("Server is listening on port 3000");
 });
