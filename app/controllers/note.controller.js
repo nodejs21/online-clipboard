@@ -52,12 +52,6 @@ exports.findOne = (req, res) => {
 
 // Update a note identified by the urlId in the request
 exports.update = (req, res) => {
-    // Validate Request
-    if(!req.params.content) {
-        return res.status(400).send({
-            message: "Note content can not be empty"
-        });
-    }
     // Find note and update it with the request params
     Note.findOneAndUpdate({"urlId": req.params.urlId}, {
         urlId: req.params.urlId || "Untitled Note",
