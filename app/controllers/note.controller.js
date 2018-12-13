@@ -5,21 +5,39 @@ exports.create = (req, res) => {
     // res.setHeader('Access-Control-Allow-Origin', 'https://yabbale-01.herokuapp.com');
     // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     // res.setHeader('Access-Control-Allow-Credentials', true);
-    console.log(req.params);
+    // console.log(req.params);
     
     // Create a Note
-    const note = new Note({
+    const newNote = new Note({
         urlId: req.params.urlId || "Untitled Note", 
         content: req.params.content
     });
     
-    // Save Note in the database
-    note.save()
-    .then(data => {
-        res.send(data);
+    
+    Note.find({"urlId": req.params.urlId})
+    .then(note => {
+        if(note.length == 0) {
+            // Save Note in the database
+            newNote.save()
+            .then(data => {
+                res.send(data);
+            }).catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred while creating the Note."
+                });
+            });
+        } else {
+            res.status(202).send("Clipboard name already exists!");
+        }
+        
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while creating the Note."
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.urlId
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving note with id " + req.params.urlId
         });
     });
 };
