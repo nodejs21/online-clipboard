@@ -31,6 +31,7 @@ exports.create = (req, res) => {
         }
         
     }).catch(err => {
+        console.log(err);
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
                 message: "Note not found with id " + req.params.urlId
