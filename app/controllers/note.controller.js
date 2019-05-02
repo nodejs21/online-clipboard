@@ -28,8 +28,7 @@ exports.create = (req, res) => {
                 });
             });
         } else {
-            res.status(202).send("Clipboard name already exists!");,
-                error: err
+            res.status(202).send("Clipboard name already exists!");
         }
         
     }).catch(err => {
