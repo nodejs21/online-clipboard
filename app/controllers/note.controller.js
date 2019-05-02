@@ -23,21 +23,25 @@ exports.create = (req, res) => {
                 res.send(data);
             }).catch(err => {
                 res.status(500).send({
-                    message: err.message || "Some error occurred while creating the Note."
+                    message: err.message || "Some error occurred while creating the Note.",
+                error: err
                 });
             });
         } else {
-            res.status(202).send("Clipboard name already exists!");
+            res.status(202).send("Clipboard name already exists!");,
+                error: err
         }
         
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.urlId
+                message: "Note not found with id " + req.params.urlId,
+                error: err
             });                
         }
         return res.status(500).send({
-            message: "Error retrieving note with id " + req.params.urlId
+            message: "Error retrieving note with id " + req.params.urlId,
+                error: err
         });
     });
 };
@@ -66,11 +70,14 @@ exports.findOne = (req, res) => {
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.urlId
+                message: "Note not found with id " + req.params.urlId,
+                error: err
             });                
         }
         return res.status(500).send({
-            message: "Error retrieving note with id " + req.params.urlId
+            message: "Error retrieving note with id " + req.params.urlId,
+                error: err,
+                error: err
         });
     });
 };
@@ -90,11 +97,13 @@ exports.update = (req, res) => {
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Note not found with id " + req.params.urlId
+                message: "Note not found with id " + req.params.urlId,
+                error: err
             });                
         }
         return res.status(500).send({
-            message: "Error updating note with id " + req.params.urlId
+            message: "Error updating note with id " + req.params.urlId,
+                error: err
         });
     });
 };
